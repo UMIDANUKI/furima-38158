@@ -1,24 +1,50 @@
-# README
+# データベース設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Users table
 
-Things you may want to cover:
+|Column              |Type     |Options                  |
+|------------------------------------------------------- |
+| nickname           | string  | null: false             |
+| email              | string  | null: false unique: true|
+| encrypted_password | string  | null: false             |
+| birthday           | integer | null: false             |
 
-* Ruby version
+### Association
+has_many :items
+has_many :orders
 
-* System dependencies
+## items table
 
-* Configuration
+|Column              |Type        |Options                         |
+|------------------------------------------------------------------|  
+| name               | string     | null: false                    |
+| price              | integer    | null: false                    |
+| explanation        | text       | null: false                    |
+| category_id        | integer    | null: false                    |
+| status_id          | integer    | null: false                    |
+| delivery_charge_id | integer    | null: false                    |
+| prefecture_id      | integer    | null: false                    |
+| time_required_id   | integer    | null: false                    |
+| user               | references | null: false, foreign_key: true |
 
-* Database creation
+### Association
+belongs_to :user
+has_one :orders
 
-* Database initialization
 
-* How to run the test suite
+## order table
+|Column          |Type        |Options                         |
+|--------------------------------------------------------------|
+| post_code      | integer    | null: false                    |
+| prefecture_id  | integer    | null: false                    |
+| municipalities | string     | null: false                    |
+| address        | string     | null: false                    |
+| buildings      | string     | null: false                    |
+| phone_number   | integer    | null: false                    |
+| user           | references | null: false, foreign_key: true |
+| item           | references | null: false, foreign_key: true |
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
-
-* ...
+### Association
+belongs_to :user
+belongs_to :item
