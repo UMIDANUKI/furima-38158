@@ -29,8 +29,17 @@ has_many :orders
 
 ### Association
 belongs_to :user
-has_one :orders
+has_one :order_detail
 
+## order_detail table
+| Column  | Type       | Options                        |
+|------------------------------------------------------ |
+| order   | references | null: false, foreign_key: true |
+| item    | references | null: false, foreign_key: true |
+
+### Association
+belongs_to :order
+belongs_to :item
 
 ## order table
 |Column          |Type        |Options                         |
@@ -42,9 +51,7 @@ has_one :orders
 | buildings      | string     | null: false                    |
 | phone_number   | integer    | null: false                    |
 | user           | references | null: false, foreign_key: true |
-| item           | references | null: false, foreign_key: true |
-
 
 ### Association
 belongs_to :user
-belongs_to :item
+has_one :order_detail
