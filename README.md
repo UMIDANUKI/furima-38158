@@ -30,30 +30,31 @@ has_many :orders
 | user               | references | null: false, foreign_key: true |
 
 ### Association
-belongs_to :user
-has_one :order_detail
+belongs_to :users
+has_one :orders
 
-## order_detail table
+
+## order table
 | Column  | Type       | Options                        |
 |------------------------------------------------------ |
-| order   | references | null: false, foreign_key: true |
+| user    | references | null: false, foreign_key: true |
 | item    | references | null: false, foreign_key: true |
 
 ### Association
-belongs_to :order
-belongs_to :item
+belongs_to :users
+belongs_to :items
+has_one :order_details
 
-## order table
-|Column          |Type        |Options                         |
-|--------------------------------------------------------------|
-| post_code      | integer    | null: false                    |
-| prefecture_id  | integer    | null: false                    |
-| municipalities | string     | null: false                    |
-| address        | string     | null: false                    |
-| buildings      | string     | null: false                    |
-| phone_number   | integer    | null: false                    |
-| user           | references | null: false, foreign_key: true |
+## order_detail table
+|Column          |Type        |Options                          |
+|-------------------------------------------------------------- |
+| post_code      | integer     | null: false                    |
+| prefecture_id  | integer     | null: false                    |
+| municipalities | string      | null: false                    |
+| address        | string      | null: false                    |
+| buildings      | string      |                                |
+| phone_number   | string      | null: false                    |
+| order          | references  | null: false, foreign_key: true |
 
 ### Association
-belongs_to :user
-has_one :order_detail
+belongs_to :orders
