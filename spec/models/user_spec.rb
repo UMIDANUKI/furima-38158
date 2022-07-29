@@ -23,7 +23,7 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Email can't be blank")
       end
-      it '登録済みのメールアドレスは入力できない' do
+      it '登録済みのメールアドレスは登録できない' do
         @user.save
         another_user = FactoryBot.build(:user)
         another_user.email = @user.email
@@ -52,8 +52,18 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Password is too long (maximum is 128 characters)")
       end
-      it '半角英数字混合でないパスワードは登録できない' do
+      it '数字のみのパスワードは登録できない' do
         @user.password = '999999'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid")
+      end
+      it 'アルファベットのみのパスワードは登録できない' do
+        @user.password = 'aaaaaa'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid")
+      end
+      it '全角文字のパスワードは登録できない' do
+        @user.password = "あいうえおか"
         @user.valid?
         expect(@user.errors.full_messages).to include("Password is invalid")
       end
