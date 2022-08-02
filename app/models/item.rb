@@ -8,6 +8,7 @@ class Item < ApplicationRecord
 
   has_one_attached :image
   belongs_to :user
+  has_one :order
 
   validates :name, presence: true, length: { minimum: 1, maximum: 40 }
   validates :explanation, presence: true, length: { minimum: 1, maximum: 1000 }
