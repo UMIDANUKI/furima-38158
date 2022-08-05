@@ -74,6 +74,18 @@ RSpec.describe Purchase, type: :model do
         expect(@purchase.errors.full_messages).to include("Phone number is too short (minimum is 10 characters)")
       end
 
+      it 'userが紐づいていないと入力できない' do
+        @purchase.user_id = nil
+        @purchase.valid?
+        expect(@purchase.errors.full_messages).to include("User can't be blank")
+      end
+
+      it 'itemが紐づいていないと入力できない' do
+        @purchase.item_id = nil
+        @purchase.valid?
+        expect(@purchase.errors.full_messages).to include("Item can't be blank")
+      end
+
       it'トークンがないと購入できない'do
         @purchase.token = nil
         @purchase.valid?
