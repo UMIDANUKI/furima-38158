@@ -1,8 +1,8 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:index]
-  before_action :sold?, only:[:index]
   before_action :find_item, only:[:index]
-
+  before_action :sold?, only:[:index]
+  
   def index
     @purchase = Purchase.new
   end
