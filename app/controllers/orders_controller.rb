@@ -14,6 +14,7 @@ class OrdersController < ApplicationController
       pay_item
       redirect_to root_path
     else
+      find_item
       render :index
     end
   end
