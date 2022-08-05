@@ -32,10 +32,10 @@ RSpec.describe Purchase, type: :model do
        expect(@purchase.errors.full_messages).to include("Post code is invalid")
       end
 
-      it '都道府県が入力されていないと購入できない' do
-        @purchase.prefectures_id = ''
+      it 'prefectures_idが1だと出品できない' do
+        @purchase.prefectures_id = 1
         @purchase.valid?
-        expect(@purchase.errors.full_messages).to include("Prefectures can't be blank")
+        expect(@purchase.errors.full_messages).to include("Prefectures must be other than 1")
       end
 
       it '市区町村が入力されていないと購入できない' do
